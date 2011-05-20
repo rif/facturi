@@ -24,7 +24,7 @@
       <td>{{=f.client.name}}</td>
       <td>{{=f.firm.name}}</td>
       <td>{{=f.amount}}</td>
-      <td>{{=f.paid}}</td>
+      <td><a href="{{=URL('toggle_paid', args=f.id)}}">{{=f.paid}}</a></td>
       <td><a href="{{=URL('index', args=f.id)}}">{{=T('Edit')}}</a>
 	<a href="{{=URL('show', args=f.id)}}">{{=T('Show')}}</a></td>
     </tr>

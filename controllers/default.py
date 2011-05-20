@@ -17,6 +17,11 @@ def firms():
     rows = db(db.firm.created_by==auth.user.id).select(orderby=db.firm.name)
     return locals()
 
+def toggle_paid():
+    f = db.invoice(a0)
+    f.update_record(paid=not f.paid)
+    redirect(URL('index'))
+
 def show():
     f = db.invoice(a0)
     return locals()

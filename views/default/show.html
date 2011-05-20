@@ -1,1 +1,24 @@
 {{extend 'layout.html'}}
+
+<table width="100%" border="1px">
+  <tbody>
+    <tr>
+      <td colspan="2"><h1>{{=T('Invoice number %s') % f.number}}</h1></td>
+    </tr>
+    <tr>
+      <td>
+	{{=f.client.name}}
+      </td>
+      <td>
+	{{=f.firm.name}}
+      </td>
+    </tr>
+    <tr>
+      <td height="600px" colspan="2">{{=MARKMIN(f.description)}}</td>
+    </tr>
+    <tr>
+       <td>{{=T('Total')}}</td>
+    <td>{{=f.amount}}</td>
+    </tr>
+  </tbody>
+</table>
