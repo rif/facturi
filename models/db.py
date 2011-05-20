@@ -99,8 +99,8 @@ db.define_table('client',
 
 db.define_table('invoice',
                 Field('number', notnull=True, unique=True),
-                Field('client', db.client),
                 Field('firm', db.firm),
+                Field('client', db.client),
                 Field('description', 'text'),
                 Field('paid', 'boolean', default=False),
                 Field('amount', 'double'),
@@ -108,4 +108,3 @@ db.define_table('invoice',
                 format='%(number)s')
 
 a0,a1 = request.args(0), request.args(1)
-

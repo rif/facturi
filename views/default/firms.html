@@ -1,0 +1,43 @@
+{{extend 'layout.html'}}
+
+<a class="expander" href="#">{{=T('Show form')}}</a>
+<div id="edit-form" style="display:none;">
+{{=form}}
+</div>
+<br/>
+
+<table>
+  <thead>
+    <tr>
+      <th>{{=T('Name')}}</th>
+      <th>{{=T('Address')}}</th>
+      <th>{{=T('CUI')}}</th>
+      <th>{{=T('Number')}}</th>
+      <th>{{=T('IBAN')}}</th>
+      <th>{{=T('Bank')}}</th>
+      <th>{{=T('Actions')}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{for row in rows:}}
+    <tr>
+      <td>{{=row.name}}</td>
+      <td>{{=row.address[:25] + '...'}}</td>
+      <td>{{=row.CUI}}</td>
+      <td>{{=row.number}}</td>
+      <td>{{=row.iban}}</td>
+      <td>{{=row.bank}}</td>
+      <td><a href="{{=URL('', args=row.id)}}">{{=T('Edit')}}</a></td>
+    </tr>
+    {{pass}}
+  </tbody>
+</table>
+
+<script type="text/javascript">
+  $(function(){
+  $(".expander").click(function(e){
+  $(this).next().slideToggle();
+  e.preventDefault();
+  });
+  });
+</script>
