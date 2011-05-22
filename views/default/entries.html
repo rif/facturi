@@ -1,0 +1,9 @@
+{{=form}}
+
+{{=entries}}
+
+<ul>
+{{for e in entries:}}
+<li><a href="{{=URL('entries',args=(f.id,e.id))}}">{{=e.description}}</a></li>
+{{pass}}
+</ul>

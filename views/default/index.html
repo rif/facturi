@@ -3,6 +3,10 @@
 <a class="expander" href="#">{{=T('Show form')}}</a>
 <div id="edit-form" style="display:none;">
 {{=form}}
+<br/>
+    {{if a0:}}
+{{=LOAD('default','entries',args=a0,ajax=True)}}
+{{pass}}
 </div>
 <br/>
 
