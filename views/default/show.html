@@ -24,51 +24,69 @@
 {{=T('Contul')}}:{{=f.client.iban}}<br/>
 </div>
 <hr/>
-<div class="span-24 last">
-<table>
-  <thead>
-    <tr>
-      <th>{{=T('Nr.')}}<br/>{{=T('crt')}}</th>
-      <th>{{=T('Denumirea produselor sau a serviciilor (lucrarilor)')}}</th>
-      <th>{{=T('U.M.')}}</th>
-      <th>{{=T('Cantitatea')}}</th>
-      <th>{{=T('Prețul unitar')}}<br/>{{=T('- lei -')}}</th>
-      <th>{{=T('Valuare')}}<br/>{{=T('- lei -')}}</th>
-    </tr>
-  </thead>
-  <tbody>
-     {{for nr,entry in enumerate(f.entry.select()):}}
-     <tr>
-       <td>{{=nr}}</td>
-       <td>{{=entry.description}}</td>
-       <td>{{=entry.mu}}</td>
-       <td>{{=entry.quanity}}</td>
-       <td>{{=entry.unit_price}}</td>
-       <td>{{=entry.price}}</td>
-     </tr>
-     {{pass}}
-  </tbody>
-</table>
+<div class="span-24 last" style="height:600px">
+  <table border="1">
+    <thead>
+      <tr>
+	<th>{{=T('Nr.')}}<br/>{{=T('crt')}}</th>
+	<th>{{=T('Denumirea produselor sau a serviciilor (lucrarilor)')}}</th>
+	<th>{{=T('U.M.')}}</th>
+	<th>{{=T('Cantitatea')}}</th>
+	<th><center>{{=T('Prețul unitar')}}<br/>{{=T('- lei -')}}</center></th>
+	<th>{{=T('Valuare')}}<br/>{{=T('- lei -')}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+	<td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5(3x4)</td>
+      </tr>
+      {{for nr,entry in enumerate(f.entry.select()):}}
+      <tr>
+	<td>{{=nr}}</td>
+	<td>{{=entry.description}}</td>
+	<td>{{=entry.mu}}</td>
+	<td>{{=entry.quanity}}</td>
+	<td>{{=entry.unit_price}}</td>
+	<td>{{=entry.price}}</td>
+      </tr>
+      {{pass}}
+    </tbody>
+  </table>
+  <div>
+    {{=T('Termen de plata')}}: {{=f.deadline}}<br/>
+    {{if f.firm.representative:}}
+    {{=T('Intocmit de')}}: {{=f.firm.representative.name}}
+    {{=T('CI')}} {{=f.firm.representative.seria}} {{=T('nr.')}} {{=f.firm.representative.nr}}
+    {{pass}}
+  </div>
 </div>
 <hr/>
 <div class="border span-8" style="height:200px">
 {{=T('Semnatura și ștampila furnizorului')}}
 </div>
-<div class="border span-9">
-{{=T('Date privind expeditia')}}
-Numele delegatului:Marius Pentek		
-		
-Identificat cu C.I. Seria:TM 614322 Nr.: Eliberat(a) de: Pol Timisoara		
-
-Expedierea s-a facut in	prezenta noastra la data:
-ora:		
-Semnatura		
+<div class="border span-9"  style="height:200px">
+{{=T('Date privind expeditia')}}<br/>
+{{if f.client.representative:}}
+{{=T('Numele delegatului')}}: {{=f.client.representative.name}}
+{{=T('Identificat cu C.I. Seria:')}} {{=f.client.representative.seria}} {{=T('Nr.')}}:{{=f.client.representative.number}}
+<br/>
+{{pass}}
+{{=T('Expedierea s-a facut in prezenta noastra la data')}}:{{=datetime.date.today().strftime("%d.%m.%Y")}}<br/>
+{{=T('ora')}}: {{=datetime.datetime.now().time().strftime("%H:%M")}}<br/>		
+{{=T('Semnatura')}}		
 </div>
 
 <div class="span-7 last">
-{{=T('Total')}}{{=f.total}}
+<table border="1">
+  <tr>
+    <td>{{=T('Total')}}</td>
+    <td>{{=f.total}}</td>
+  </tr>
+  <tr>
+    <td>{{=T('Semnatura de primire')}}</td>
+    <td>{{=T('Total de plata')}} {{=f.total}}</td>
+  </tr>
+</table>
 
-{{=T('Semnatura de primire')}}
-{{=T('Total de plata')}} {{=f.total}}
 
 </div>
