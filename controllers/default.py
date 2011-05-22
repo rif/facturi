@@ -6,12 +6,13 @@ def index():
     facturi = db(db.invoice.created_by==auth.user.id).select(orderby=db.invoice.number)
     return locals()
 
+@auth.requires_login()
 def clients():
     form = crud.update(db.client, a0, next=URL('clients'))
     rows = db(db.client.created_by==auth.user.id).select(orderby=db.client.name)
     return response.render('default/firms.html', locals())
 
-
+@auth.requires_login()
 def firms():
     form = crud.update(db.firm, a0, next=URL('firms'))
     rows = db(db.firm.created_by==auth.user.id).select(orderby=db.firm.name)

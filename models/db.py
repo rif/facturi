@@ -76,6 +76,12 @@ crud.settings.auth = None                      # =auth to enforce authorization 
 ## >>> rows=db(db.mytable.myfield=='value').select(db.mytable.ALL)
 ## >>> for row in rows: print row.id, row.myfield
 #########################################################################
+import datetime 
+db.define_table('representative',
+                Field('name'),
+                Field('seria'),
+                Field('nr'),
+                format='%(name)s')
 
 db.define_table('firm',
                 Field('name', notnull=True, unique=True),
@@ -84,6 +90,7 @@ db.define_table('firm',
                 Field('number'),
                 Field('iban'),
                 Field('bank'),
+                Field('representative', db.representative),
                 auth.signature,
                 format='%(name)s')
 
@@ -94,6 +101,7 @@ db.define_table('client',
                 Field('number'),
                 Field('iban'),
                 Field('bank'),
+                Field('representative', db.representative),
                 auth.signature,
                 format='%(name)s')
 
@@ -101,10 +109,19 @@ db.define_table('invoice',
                 Field('number', notnull=True, unique=True),
                 Field('firm', db.firm),
                 Field('client', db.client),
-                Field('description', 'text'),
                 Field('paid', 'boolean', default=False),
-                Field('amount', 'double'),
+                Field('total', 'double'),
+                Field('deadline', 'date', default=datetime.date.today()+datetime.timedelta(15)),
                 auth.signature,
                 format='%(number)s')
+
+db.define_table('entry',
+                Field('invoice', db.invoice),
+                Field('description'),
+                Field('mu'),
+                Field('quantity', 'integer'),
+                Field('unit_price', 'double'),
+                Field('price', 'double', compute=lambda r: r['quantity'] * r['unit_price']),
+                format='%(description)s')
 
 a0,a1 = request.args(0), request.args(1)

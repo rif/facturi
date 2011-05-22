@@ -12,7 +12,7 @@
       <th>{{=T('#')}}</th>
       <th>{{=T('Client')}}</th>
       <th>{{=T('Firm')}}</th>
-      <th>{{=T('Amount')}}</th>
+      <th>{{=T('Total')}}</th>
       <th>{{=T('Paid')}}</th>
       <th>{{=T('Actions')}}</th>
     </tr>
@@ -23,7 +23,7 @@
       <td>{{=f.number}}</td>
       <td>{{=f.client.name}}</td>
       <td>{{=f.firm.name}}</td>
-      <td>{{=f.amount}}</td>
+      <td>{{=f.total}}</td>
       <td><a href="{{=URL('toggle_paid', args=f.id)}}">{{=f.paid}}</a></td>
       <td><a href="{{=URL('index', args=f.id)}}">{{=T('Edit')}}</a>
 	<a href="{{=URL('show', args=f.id)}}">{{=T('Show')}}</a></td>
@@ -33,10 +33,10 @@
 </table>
 
 <script type="text/javascript">
-  $(function(){
-  $(".expander").click(function(e){
-  $(this).next().slideToggle();
-  e.preventDefault();
-  });
-  });
+    $(function(){
+	$(".expander").click(function(e){
+	    $(this).next().slideToggle();
+	    e.preventDefault();
+	});
+    });
 </script>
