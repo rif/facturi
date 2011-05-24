@@ -94,15 +94,7 @@ db.define_table('firm',
                 auth.signature,
                 format='%(name)s')
 
-db.define_table('client',
-                Field('name', notnull=True, unique=True),
-                Field('address', 'text'),
-                Field('CUI'),
-                Field('number'),
-                Field('iban'),
-                Field('bank'),
-                Field('representative', db.representative),
-                auth.signature,
+db.define_table('client', db.firm,
                 format='%(name)s')
 
 db.define_table('invoice',
